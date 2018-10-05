@@ -21,7 +21,8 @@
       "psr-4": {
         "Zehir\\": "src/",
         "Zehir\\System\\": "src/",
-        "Zehir\\Settings\\": "src/"
+        "Zehir\\Settings\\": "src/",
+        "Zehir\\Migrations\\": "src/"
       }
     }
 }
