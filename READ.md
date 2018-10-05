@@ -4,10 +4,13 @@ use  Zehir\System\App;
 
 include "../vendor/autoload.php"; 
 
+/**
+'url-path'=>'MVC/bundle-path'
+**/
 setup::$bundles=[
     'api'=>'API',
     'stok'=>'STOK',
-    'zehir'=>'PANEL'
+    'zehir'=>'PANEL' 
 ];
 
 setup::$target = 'dev'; //for select target database configuration
