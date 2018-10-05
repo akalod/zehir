@@ -14,7 +14,8 @@
         "monolog/monolog": "^1",
         "illuminate/database": "5.4.36",
         "symfony/yaml": "^4.0",
-        "erusev/parsedown": "^1"
+        "erusev/parsedown": "^1",
+        "php": ">=5.5.9"
     },
     "autoload": {
       "psr-4": {
