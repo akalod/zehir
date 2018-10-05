@@ -10,8 +10,8 @@ setup::$bundles=[
     'zehir'=>'PANEL'
 ];
 
-setup::$target = 'dev';
-setup::$webUrl = 'http://marketsenin.localhost/';
+setup::$target = 'dev'; //for select target database configuration
+setup::$webUrl = 'http://localhost/';
 
 App::run();
 ```
