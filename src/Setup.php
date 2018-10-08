@@ -29,6 +29,7 @@ class Setup
     public static $mainController = 'main';
     public static $routeDB = true;
     public static $disableServiceArea = false;
+    public static $disablePlannedDelivery = false;
     /**
      * $routeDB açık ise search_extend devreye girecektir.
      * @var array [db.table.seo] => [controller.file]
