@@ -13,7 +13,7 @@
         "predis/predis": "^1",
         "monolog/monolog": "^1",
         "illuminate/database": "5.2",
-        "symfony/yaml": "^4.0",
+        "symfony/yaml": "^3.4",
         "erusev/parsedown": "^1",
         "php": ">=5.5.9"
     },
