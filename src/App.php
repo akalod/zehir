@@ -321,8 +321,11 @@ class App
         if (file_exists($realPath . 'end.php')) {
             include $realPath . 'end.php';
         }
-        if(Setup::$multiLang){
+        if (Setup::$multiLang) {
             Data::loadLang(Setup::$langId);
+        }
+        if (!Setup::$isResponsiveDesign && App::$isMobile) {
+            App::$view = Setup::$mobileDir . '/' . App::$view;
         }
         //template engine in karar verilip yüklenmesi
         if (Setup::$template_engine) {
@@ -344,19 +347,19 @@ class App
                         return $markDown->parse($string);
                     }, ['is_safe' => ['all']])
                 );
-            }catch (\Twig_Error $e){
-               if(Setup::$target=='prod'){
-                   die('Views directory does not exist');
-               }else {
-                   die($e->getMessage());
-               }
+            } catch (\Twig_Error $e) {
+                if (Setup::$target == 'prod') {
+                    die('Views directory does not exist');
+                } else {
+                    die($e->getMessage());
+                }
             }
 
             try {
                 return $twig->render(self::$view . '.phtml', self::$data);
             } catch (\Twig_Error $exception) {
                 self::$message = $exception->getMessage();
-                if(Setup::$target!='prod'){
+                if (Setup::$target != 'prod') {
                     die(self::$message);
                 }
                 return false;
@@ -384,7 +387,7 @@ class App
             //ORM i ayarla
             self::connect();
         }
-        if($params=='install'){
+        if ($params == 'install') {
             Structure::create();
             self::processHalt();
         }
@@ -394,7 +397,7 @@ class App
         //router'dan parametreleri al
         Router::up();
 
-        if($params){
+        if ($params) {
             Router::$controller = $params;
         }
 

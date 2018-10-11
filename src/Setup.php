@@ -30,7 +30,8 @@ class Setup
     public static $cacheDir = '_cache';
     public static $langDir = '_lang';
     public static $dataDir = '_data';
-    public static $enableLanguages = [['id'=>1,'lang'=>'TxR']];
+    public static $mobileDir = 'mobile';
+    public static $enableLanguages = [['id'=>1,'lang'=>'TR']];
     public static $langId = 1;
     public static $mainController = 'main';
     public static $routeDB = true;
