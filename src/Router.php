@@ -31,7 +31,7 @@ class Router
         $thisPage = substr(str_replace($_SERVER['SCRIPT_NAME'], null, $_SERVER['PHP_SELF']), 1);
 
         App::assign('thisPage', $thisPage);
-        App::assign('basePath', str_replace('public/' . basename($_SERVER["SCRIPT_FILENAME"]), '', $_SERVER['SCRIPT_NAME']));
+        App::assign('basePath', str_replace(['public/' . basename($_SERVER["SCRIPT_FILENAME"]), basename($_SERVER["SCRIPT_FILENAME"])], '', $_SERVER['SCRIPT_NAME']));
         return explode('/', $thisPage);
     }
 
