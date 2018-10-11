@@ -1,0 +1,12 @@
+DirectoryIndex _app.php
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+
+#RULE IMPORTED RULE
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{URL} !-d
+RewriteRule ^(.*)$ _app.php/$1 [L]
+
+</IfModule>

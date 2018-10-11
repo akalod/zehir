@@ -10,6 +10,7 @@
 
 namespace Zehir\System;
 
+use Zehir\Migrations\Structure;
 use Zehir\Settings\Setup;
 use Zehir\Filters;
 use Illuminate\Database\Capsule\Manager as DB;
@@ -304,6 +305,9 @@ class App
                 self::$controller = new  \main();
             } else {
                 self::$message = 'Controller Not Found:' . $controllerFile;
+                if (Setup::$target != 'prod') {
+                    die(self::$message);
+                }
                 return false;
             }
 
@@ -317,29 +321,44 @@ class App
         if (file_exists($realPath . 'end.php')) {
             include $realPath . 'end.php';
         }
+        if(Setup::$multiLang){
+            Data::loadLang(Setup::$langId);
+        }
         //template engine in karar verilip yüklenmesi
         if (Setup::$template_engine) {
-            $loader = new \Twig_Loader_Filesystem($realPath . 'views');
-            $twig = new \Twig_Environment($loader, array(
-                'cache' => base . '/' . Setup::$cacheDir,
-                'auto_reload' => true
-            ));
-            $twig->addFilter(
-                new \Twig_SimpleFilter('seo', function ($string) {
-                    return Filters::seo($string);
-                })
-            );
-            $twig->addFilter(
-                new \Twig_SimpleFilter('markdown', function ($string) {
-                    $markDown = new \Parsedown();
-                    $markDown->setSafeMode(true);
-                    return $markDown->parse($string);
-                },[ 'is_safe' => ['all']])
-            );
+            try {
+                $loader = new \Twig_Loader_Filesystem($realPath . 'views');
+                $twig = new \Twig_Environment($loader, array(
+                    'cache' => base . '/' . Setup::$cacheDir,
+                    'auto_reload' => true
+                ));
+                $twig->addFilter(
+                    new \Twig_SimpleFilter('seo', function ($string) {
+                        return Filters::seo($string);
+                    })
+                );
+                $twig->addFilter(
+                    new \Twig_SimpleFilter('markdown', function ($string) {
+                        $markDown = new \Parsedown();
+                        $markDown->setSafeMode(true);
+                        return $markDown->parse($string);
+                    }, ['is_safe' => ['all']])
+                );
+            }catch (\Twig_Error $e){
+               if(Setup::$target=='prod'){
+                   die('Views directory does not exist');
+               }else {
+                   die($e->getMessage());
+               }
+            }
+
             try {
                 return $twig->render(self::$view . '.phtml', self::$data);
             } catch (\Twig_Error $exception) {
                 self::$message = $exception->getMessage();
+                if(Setup::$target!='prod'){
+                    die(self::$message);
+                }
                 return false;
             }
         }
@@ -348,23 +367,39 @@ class App
 
     public static function run($params = null)
     {
+        if (!defined('base')) {
+            $fileName = $_SERVER['SCRIPT_FILENAME'];
+            $scriptName = explode('/', $_SERVER['SCRIPT_NAME'])[1];
+            $dir = substr(str_replace($scriptName, '', $fileName), 0, -1);
+            define('base', $dir);
+        }
         // charset
         header('Content-Type: text/html; charset=UTF-8');
 
-        //veritabanı ayarlarını yükle
-        Setup::database();
+        //veritabanı bağlantılı mı çalışacağına karar verme
+        if (!Setup::$noDatabase) {
+            //veritabanı ayarlarını yükle
+            Setup::database();
 
-        //ORM i ayarla
-        self::connect();
-
+            //ORM i ayarla
+            self::connect();
+        }
+        if($params=='install'){
+            Structure::create();
+            self::processHalt();
+        }
         //checks
         self::setupCheck();
 
         //router'dan parametreleri al
         Router::up();
 
-        if (Setup::$routeDB) {
-            $dbRouter = Router::search(Router::$controller);
+        if($params){
+            Router::$controller = $params;
+        }
+
+        if (Setup::$routeDB && !Setup::$noDatabase) {
+            $dbRouter = $params ? Router::search($params) : Router::search(Router::$controller);
             if ($dbRouter) {
                 App::$param = $dbRouter['param'];
                 Router::$controller = $dbRouter['controller'];

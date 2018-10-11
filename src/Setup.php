@@ -13,7 +13,9 @@ namespace Zehir\Settings;
 
 class Setup
 {
+    public static $multiLang = true;
     public static $redis = false;
+    public static $noDatabase = false;
     public static $isResponsiveDesign = true;
     public static $cacheTime = 500;
     public static $target = 'test';
@@ -26,10 +28,15 @@ class Setup
     public static $session_key = "pTH7nUV4EqxU";
     public static $appDir = '_app';
     public static $cacheDir = '_cache';
+    public static $langDir = '_lang';
+    public static $dataDir = '_data';
+    public static $enableLanguages = [['id'=>1,'lang'=>'TxR']];
+    public static $langId = 1;
     public static $mainController = 'main';
     public static $routeDB = true;
     public static $disableServiceArea = false;
     public static $disablePlannedDelivery = false;
+    public static $installParameters = ['pages'];
     /**
      * $routeDB açık ise search_extend devreye girecektir.
      * @var array [db.table.seo] => [controller.file]
@@ -99,6 +106,10 @@ class Setup
     public static function database()
     {
         self::setGetTarget();
+
+        if (!isset(self::$databaseSettings[self::$target])) {
+            die('"' . self::$target . '" database settings doesn\'t set');
+        }
 
         define('DB_ADAPTER', self::$databaseSettings[self::$target]['adapter']);
         define('DB_HOST', self::$databaseSettings[self::$target]['host']);

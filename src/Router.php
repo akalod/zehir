@@ -38,12 +38,25 @@ class Router
     public static function search($key)
     {
         try {
-            $query = DB::table('router')->select(['param as id', 'seo', 'controller'])->where('seo', $key);
+            $select = ['param as id', 'seo', 'controller'];
+            if (Setup::$multiLang)
+                $select[] = 'langId';
+
+            $query = DB::table('router')->select($select)->where('seo', $key);
             foreach (Setup::$search_extend as $k => $v) {
-                $query = $query->union(DB::table($k)->select(['id', 'seo', DB::RAW('concat("' . $v . '") as controller')])->where('seo', $key));
+                $select = ['id', 'seo', DB::RAW('concat("' . $v . '") as controller')];
+                if (Setup::$multiLang)
+                    $select[] = 'langId';
+
+                $query = $query->union(DB::table($k)->select($select)->where('seo', $key));
             }
             $r = $query->first();
-            return $r ? ['controller' => $r->controller, 'param' => $r->id] : false;
+            return $r ? [
+                'controller' => $r->controller,
+                'param' => $r->id,
+                'langId' => Setup::$multiLang ? $r->langId : 0]
+                : false;
+
         } catch (\PDOException $e) {
             $code = $e->getCode();
             if ($code == '1044') {
