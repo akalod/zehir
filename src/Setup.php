@@ -13,7 +13,7 @@ namespace Zehir\Settings;
 
 class Setup
 {
-    public static $multiLang = true;
+    public static $multiLang = false;
     public static $redis = false;
     public static $noDatabase = false;
     public static $isResponsiveDesign = true;
