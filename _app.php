@@ -15,13 +15,12 @@ include "vendor/autoload.php";
 Setup::$noDatabase = false;
 Setup::configure([
     'test' => Array(
-        'host' => '91.121.161.203',
-        'name' => 'dp_tests',
-        'user' => 'dp_tests',
-        'pass' => 'muodXrDEsL',
+        'host' => 'demo.digitalpanzehir.com',
+        'name' => 'dp_eruslu',
+        'user' => 'dp_eruslu',
+        'pass' => 'lvIeF0AoiI',
         'port' => 3306,
         'adapter' => 'mysql'
     )]);
-
 Setup::$enableLanguages[]=['id'=>2,'lang'=>'EN'];
 App::run();

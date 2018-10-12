@@ -28,6 +28,7 @@ class Structure
             $table->tinyInteger('status')->default(0);
             $table->smallInteger('langId')->default(0);
             $table->smallInteger('group')->default(0);
+            $table->integer('short')->default(0);
         });
     }
 

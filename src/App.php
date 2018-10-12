@@ -314,7 +314,10 @@ class App
         } else {
 
             include $controllerFile;
-            self::$controller = new  Router::$controller();
+            if (class_exists(Router::$controller))
+                self::$controller = new  Router::$controller();
+            else
+                die('Class: "'.Router::$controller . '" not found');
         }
 
         // nesne yüklenip sonuclandıktan sonra yüklenen
