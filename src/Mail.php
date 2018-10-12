@@ -9,10 +9,9 @@
 namespace Zehir\System;
 
 
-use PHPMailer;
 use Zehir\Settings\Setup;
 use Zehir\Filters;
-
+use PHPMailer\PHPMailer\PHPMailer;
 class Mail
 {
 
