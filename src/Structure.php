@@ -25,6 +25,7 @@ class Structure
             $table->string('metaDescription')->nullable();
             $table->string('metaKeywords')->nullable();
             $table->longText('content')->nullable();
+            $table->text('jsBody')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->smallInteger('langId')->default(0);
             $table->smallInteger('group')->default(0);
