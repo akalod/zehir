@@ -27,6 +27,7 @@ class Structure
             $table->longText('content')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->smallInteger('langId')->default(0);
+            $table->smallInteger('group')->default(0);
         });
     }
 
