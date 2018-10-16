@@ -22,7 +22,9 @@
         "Zehir\\": "src/",
         "Zehir\\System\\": "src/",
         "Zehir\\Settings\\": "src/",
-        "Zehir\\Migrations\\": "src/"
+        "Zehir\\Migrations\\": "src/",
+        "Zehir\\Controllers\\": "src/Controllers",
+        "Zehir\\Models\\": "src/Models"
       }
     }
 }
