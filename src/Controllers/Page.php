@@ -19,10 +19,16 @@ class Page
     function __construct()
     {
         if (App::$param) {
-            $this->data = Pages::getPage(App::$param);
+            $this->data = Pages::get(App::$param);
             App::assign('data', $this->data);
-            if (isset($this->data->pageTitle)) {
-                App::assign('pageTitle', $this->data->pageTitle);
+            if (isset($this->data->page_title)) {
+                App::assign('pageTitle', $this->data->page_title);
+            }
+            if (isset($this->data->meta_keywords)) {
+                App::assign('metaKeywords', $this->data->meta_keywords);
+            }
+            if (isset($this->data->meta_description)) {
+                App::assign('metaDescription', $this->data->meta_description);
             }
         }
     }

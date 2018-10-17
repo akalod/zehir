@@ -1,41 +1,45 @@
 <?php
+
 namespace Zehir\Models;
 
 Use Illuminate\Database\Capsule\Manager as DB;
 
-class Pages
+class Pages extends Generic
 {
-
     private static $table = 'pages';
 
-    public static function getPage($id)
+    public static function getAll($langId = 0, $column = null, $permission = false)
     {
-        return DB::table(self::$table)
-            ->where('status', 1)
-            ->where('id', $id)
-            ->first();
+        if (!$column) {
+            $column = ['id', 'seo', 'title', 'langId', 'group'];
+        }
+        $q = DB::table(self::$table);
+
+        if ($langId) {
+            $q->where('langId', $langId);
+        }
+
+        if (!$permission) {
+            $q->where('status', 1);
+        }
+
+        return $q->orderBy('short', 'asc')->get($column);
     }
 
-    public static function deletePage($pageId)
+    public static function getGroupPages($groupId, $langId = 0, $permission = false)
     {
-        return DB::table(self::$table)
-            ->delete($pageId);
-    }
+        $q = DB::table(self::$table)
+            ->where('group', $groupId);
 
-    public static function updatePage($pageId, $data)
-    {
-        return DB::table(self::$table)
-            ->where('id', $pageId)
-            ->update($data);
-    }
+        if (!$permission) {
+            $q->where('status', 1);
+        }
 
-    public static function getGroupPages($groupId, $langId = 1)
-    {
-        return DB::table(self::$table)
-            ->where('status', 1)
-            ->where('group', $groupId)
-            ->where('langId', $langId)
-            ->orderBy('short', 'asc')
+        if ($langId) {
+            $q->where('langId', $langId);
+        }
+
+        return $q->orderBy('short', 'asc')
             ->get(['id', 'seo', 'title']);
     }
 
