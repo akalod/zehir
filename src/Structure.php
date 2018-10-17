@@ -25,12 +25,13 @@ class Structure
             $table->string('src');
             $table->string('text')->nullable();
             $table->string('link')->nullable();
-            $table->string('langId')->default(0);
             $table->string('btn_text')->nullable();
             $table->enum('type', ['img', 'iframe', 'video'])->default('img');
             $table->enum('viewable', ['responsive', 'mobile', 'desktop'])->default('responsive');
             $table->enum('target', ['_self', '_blank', '_parent', '_top'])->default('_self');
             $table->integer('short')->default(0);
+            $table->tinyInteger('status')->default(0);
+            $table->string('langId')->default(0);
         });
     }
 
