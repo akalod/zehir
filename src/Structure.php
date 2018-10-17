@@ -25,7 +25,7 @@ class Structure
             $table->string('src');
             $table->string('text')->nullable();
             $table->string('link')->nullable();
-            $table->string('lang_id')->default(0);
+            $table->string('langId')->default(0);
             $table->string('btn_text')->nullable();
             $table->enum('type', ['img', 'iframe', 'video'])->default('img');
             $table->enum('viewable', ['responsive', 'mobile', 'desktop'])->default('responsive');
