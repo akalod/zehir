@@ -16,7 +16,12 @@ class News extends Generic
 {
     static $table = 'news';
 
-    public static function getAll($langId = 0, $column = null, $permission = false)
+    public static function getLast($langId = 0, $limit = 10)
+    {
+        return self::getAll($langId, null, $limit);
+    }
+
+    public static function getAll($langId = 0, $column = null, $limit = null, $permission = false)
     {
         if (!$column) {
             $column = ['id', 'seo', 'image', 'summary', 'title', 'date'];
@@ -29,6 +34,9 @@ class News extends Generic
 
         if (!$permission) {
             $q->where('status', 1);
+        }
+        if ($limit) {
+            $q->limit($limit);
         }
 
         return $q->orderBy('date', 'desc')->get($column);
