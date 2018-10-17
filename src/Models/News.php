@@ -14,7 +14,7 @@ Use Illuminate\Database\Capsule\Manager as DB;
 
 class News extends Generic
 {
-    private static $table = 'news';
+    static $table = 'news';
 
     public static function getAll($langId = 0, $column = null, $permission = false)
     {

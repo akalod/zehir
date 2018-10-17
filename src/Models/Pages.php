@@ -6,7 +6,7 @@ Use Illuminate\Database\Capsule\Manager as DB;
 
 class Pages extends Generic
 {
-    private static $table = 'pages';
+    static $table = 'pages';
 
     public static function getAll($langId = 0, $column = null, $permission = false)
     {

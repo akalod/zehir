@@ -14,7 +14,7 @@ Use Illuminate\Database\Capsule\Manager as DB;
 
 class Banners extends Generic
 {
-    private static $table = 'banners';
+    static $table = 'banners';
 
     const RESPONSIVE = 1;
     const DESKTOP = 2;
