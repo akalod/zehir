@@ -23,4 +23,6 @@ Setup::configure([
         'adapter' => 'mysql'
     )]);
 Setup::$enableLanguages[]=['id'=>2,'lang'=>'EN'];
-App::run();
+Setup::$enableLanguages[]=['id'=>3,'lang'=>'AR'];
+Setup::$installParameters=['news','banners'];
+App::run('install');
