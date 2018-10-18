@@ -11,7 +11,7 @@ class Pages extends Generic
     public static function getAll($langId = 0, $column = null, $permission = false)
     {
         if (!$column) {
-            $column = ['id', 'seo', 'title', 'langId', 'group'];
+            $column = ['id', 'seo', 'title', 'lang_id', 'group'];
         }
         $q = DB::table(self::$table);
 
@@ -36,7 +36,7 @@ class Pages extends Generic
         }
 
         if ($langId) {
-            $q->where('langId', $langId);
+            $q->where('lang_id', $langId);
         }
 
         return $q->orderBy('short', 'asc')

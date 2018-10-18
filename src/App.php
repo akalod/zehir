@@ -409,6 +409,8 @@ class App
             if ($dbRouter) {
                 App::$param = $dbRouter['param'];
                 Router::$controller = $dbRouter['controller'];
+                if(Setup::$multiLang)
+                    Setup::$langId = $dbRouter['lang_id'];
             }
         }
 

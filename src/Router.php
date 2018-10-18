@@ -40,13 +40,13 @@ class Router
         try {
             $select = ['param as id', 'seo', 'controller'];
             if (Setup::$multiLang)
-                $select[] = 'langId';
+                $select[] = 'lang_id';
 
             $query = DB::table('router')->select($select)->where('seo', $key);
             foreach (Setup::$search_extend as $k => $v) {
                 $select = ['id', 'seo', DB::RAW('concat("' . $v . '") as controller')];
                 if (Setup::$multiLang)
-                    $select[] = 'langId';
+                    $select[] = 'lang_id';
 
                 $query = $query->union(DB::table($k)->select($select)->where('seo', $key));
             }
@@ -54,7 +54,7 @@ class Router
             return $r ? [
                 'controller' => $r->controller,
                 'param' => $r->id,
-                'langId' => Setup::$multiLang ? $r->langId : 0]
+                'lang_id' => Setup::$multiLang ? $r->lang_id : 0]
                 : false;
 
         } catch (\PDOException $e) {

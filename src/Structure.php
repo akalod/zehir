@@ -31,7 +31,7 @@ class Structure
             $table->enum('target', ['_self', '_blank', '_parent', '_top'])->default('_self');
             $table->integer('short')->default(0);
             $table->tinyInteger('status')->default(0);
-            $table->string('langId')->default(0);
+            $table->string('lang_id')->default(0);
         });
     }
 
@@ -50,7 +50,7 @@ class Structure
             $table->text('js_body')->nullable();
             $table->timestamp('date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->tinyInteger('status')->default(0);
-            $table->smallInteger('langId')->default(0);
+            $table->smallInteger('lang_id')->default(0);
         });
     }
 
@@ -66,7 +66,7 @@ class Structure
             $table->longText('content')->nullable();
             $table->text('js_body')->nullable();
             $table->tinyInteger('status')->default(0);
-            $table->smallInteger('langId')->default(0);
+            $table->smallInteger('lang_id')->default(0);
             $table->smallInteger('group')->default(0);
             $table->integer('short')->default(0);
         });
@@ -81,7 +81,7 @@ class Structure
                 $table->string('seo')->unique();
                 $table->string('controller');
                 $table->string('param')->nullable();
-                $table->smallInteger('langId')->default(0);
+                $table->smallInteger('lang_id')->default(0);
             });
         }
     }
