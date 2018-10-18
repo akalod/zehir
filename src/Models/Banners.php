@@ -26,7 +26,7 @@ class Banners extends Generic
         $q = DB::table(self::$table);
 
         if ($langId) {
-            $q->where('langId', $langId);
+            $q->where('lang_id', $langId);
         }
 
         if ($viewable == self::MOBILE) {
