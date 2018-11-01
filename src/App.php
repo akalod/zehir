@@ -516,7 +516,7 @@ class App
         header('Content-Type: text/html; charset=UTF-8');
 
         //veritabanı bağlantılı mı çalışacağına karar verme
-        if (!Setup::$noDatabase) {
+        if (!Setup::$noSQL) {
             //veritabanı ayarlarını yükle
             Setup::database();
 
