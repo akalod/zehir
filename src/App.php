@@ -537,7 +537,7 @@ class App
             Router::$controller = $params;
         }
 
-        if (Setup::$routeDB && !Setup::$noDatabase) {
+        if (Setup::$routeDB && !Setup::$noSQL) {
             $dbRouter = $params ? Router::search($params) : Router::search(Router::$controller);
             if ($dbRouter) {
                 App::$param = $dbRouter['param'];
