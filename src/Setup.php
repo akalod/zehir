@@ -16,6 +16,7 @@ class Setup
     public static $multiLang = false;
     public static $redis = false;
     public static $noSQL = false;
+    public static $useSession = true;
     public static $isResponsiveDesign = true;
     public static $cacheTime = 500;
     public static $target = 'test';

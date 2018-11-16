@@ -337,7 +337,9 @@ class App
 
     private static function setupCheck()
     {
-        session_start();
+        if (Setup::$useSession) {
+            session_start();
+        }
 
         self::$isAjax = self::check_ajax();
         self::$isBot = self::check_bot();
