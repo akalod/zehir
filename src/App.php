@@ -404,7 +404,8 @@ class App
         }
 
         //modelleri yükle
-        $files = glob(base . '/' . Setup::$appDir . '/models/*.php');
+        $files = array_merge(glob(base . '/' . Setup::$appDir . '/models/*.php'), glob(base . '/' . Setup::$appDir . '/models/**/*.php'));
+
         $c = count($files);
 
         for ($i = 0; $i < $c; $i++) {
