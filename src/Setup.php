@@ -32,7 +32,7 @@ class Setup
     public static $langDir = '_lang';
     public static $dataDir = '_data';
     public static $mobileDir = 'mobile';
-    public static $enableLanguages = [['id'=>1,'lang'=>'TR']];
+    public static $enableLanguages = [['id' => 1, 'lang' => 'TR']];
     public static $langId = 1;
     public static $mainController = 'main';
     public static $routeDB = true;
@@ -114,11 +114,16 @@ class Setup
         }
 
         define('DB_ADAPTER', self::$databaseSettings[self::$target]['adapter']);
-        define('DB_HOST', self::$databaseSettings[self::$target]['host']);
-        define('DB_NAME', self::$databaseSettings[self::$target]['name']);
-        define('DB_USER', self::$databaseSettings[self::$target]['user']);
-        define('DB_PASSWORD', self::$databaseSettings[self::$target]['pass']);
-        define('DB_PORT', self::$databaseSettings[self::$target]['port']);
+        if (isset(self::$databaseSettings[self::$target]['host']))
+            define('DB_HOST', self::$databaseSettings[self::$target]['host']);
+        if (isset(self::$databaseSettings[self::$target]['name']))
+            define('DB_NAME', self::$databaseSettings[self::$target]['name']);
+        if (isset(self::$databaseSettings[self::$target]['user']))
+            define('DB_USER', self::$databaseSettings[self::$target]['user']);
+        if (isset(self::$databaseSettings[self::$target]['pass']))
+            define('DB_PASSWORD', self::$databaseSettings[self::$target]['pass']);
+        if (isset(self::$databaseSettings[self::$target]['port']))
+            define('DB_PORT', self::$databaseSettings[self::$target]['port']);
     }
 
     public static function configure($data)

@@ -92,17 +92,25 @@ class App
     {
         if (!self::$db) {
             self::$db = new DB;
-            self::$db->addConnection([
-                'driver' => DB_ADAPTER,
-                'host' => DB_HOST,
-                'database' => DB_NAME,
-                'username' => DB_USER,
-                'password' => DB_PASSWORD,
-                'port' => DB_PORT,
-                'charset' => 'utf8',
-                'collation' => 'utf8_unicode_ci',
-                'prefix' => Setup::$prefix,
-            ], 'default');
+            if (DB_ADAPTER == 'sqlite') {
+                self::$db->addConnection([
+                    'driver' => 'sqlite',
+                    'database' => DB_NAME,
+                    'prefix' => Setup::$prefix,
+                ], 'default');
+            } else {
+                self::$db->addConnection([
+                    'driver' => DB_ADAPTER,
+                    'host' => DB_HOST,
+                    'database' => DB_NAME,
+                    'username' => DB_USER,
+                    'password' => DB_PASSWORD,
+                    'port' => DB_PORT,
+                    'charset' => 'utf8',
+                    'collation' => 'utf8_unicode_ci',
+                    'prefix' => Setup::$prefix,
+                ], 'default');
+            }
             self::$db->setAsGlobal();
             //self::$db->setFetchMode(PDO::FETCH_ASSOC);
             self::$db->bootEloquent();
