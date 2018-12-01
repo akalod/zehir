@@ -12,6 +12,7 @@ namespace Zehir\System;
 use Zehir\Settings\Setup;
 use Zehir\Filters;
 use PHPMailer\PHPMailer\PHPMailer;
+
 class Mail
 {
 
@@ -57,6 +58,12 @@ class Mail
         $mail->Username = Setup::$SMTP['Username'];
         $mail->Password = Setup::$SMTP['Password'];
         // $mail->SMTPSecure = 'tls';
+        if (isset(Setup::$SMTP['SMTPSecure'])) {
+            $mail->SMTPSecure = Setup::$SMTP['SMTPSecure'];
+        }
+        if (isset(Setup::$SMTP['Debug'])) {
+            $mail->SMTPDebug = Setup::$SMTP['Debug'];
+        }
         $mail->Port = Setup::$SMTP['Port'];
 
         $mail->From = Setup::$SMTP['Username'];
@@ -77,7 +84,7 @@ class Mail
             )
         );
 
-        if (Setup::$target!='prod') {
+        if (Setup::$target != 'prod') {
             $mail->addAddress(Setup::$SMTP['DevMail']);
         } else {
 
