@@ -32,6 +32,8 @@ class App
 
     public static $message;
 
+    public static $requestHeaders = [];
+
 
     private static function check_ajax()
     {
@@ -515,6 +517,14 @@ class App
 
     }
 
+    public static function getAuthToken()
+    {
+        if (isset(self::$requestHeaders['Authorization'])) {
+            return self::$requestHeaders['Authorization'];
+        }
+        return false;
+    }
+
     public static function run($params = null)
     {
         if (!defined('base')) {
@@ -525,6 +535,9 @@ class App
         }
         // charset
         header('Content-Type: text/html; charset=UTF-8');
+
+        //request headers depolama
+        self::$requestHeaders = apache_request_headers();
 
         //veritabanı bağlantılı mı çalışacağına karar verme
         if (!Setup::$noSQL) {
