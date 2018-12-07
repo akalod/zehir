@@ -599,7 +599,14 @@ class App
         } catch (\Twig_Error $e) {
             return false;
         }
+    }
 
-
+    public static function jsonMarshal(&$object)
+    {
+        foreach (self::$json as $k => $val) {
+            if (property_exists($object, $k)) {
+                $object->$k = $val;
+            }
+        }
     }
 }
