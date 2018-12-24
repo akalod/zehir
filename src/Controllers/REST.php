@@ -70,7 +70,6 @@ class REST
                 $this->PATCH();
                 break;
             default:
-                $this->GET();
         }
 
     }
