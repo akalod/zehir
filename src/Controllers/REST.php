@@ -69,6 +69,9 @@ class REST
             case 'PATCH':
                 $this->PATCH();
                 break;
+            case 'GET':
+                $this->GET();
+                break;
             default:
         }
 
