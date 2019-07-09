@@ -12,17 +12,22 @@ use  Zehir\System\App;
 
 include "vendor/autoload.php";
 
-Setup::$noDatabase = false;
+Setup::$noSQL = false;
 Setup::configure([
     'test' => Array(
-        'host' => 'demo.digitalpanzehir.com',
-        'name' => 'dp_eruslu',
-        'user' => 'dp_eruslu',
-        'pass' => 'lvIeF0AoiI',
+        'host' => 'localhost',
+        'name' => 'dumb_table',
+        'user' => 'root',
+        'pass' => 'root',
         'port' => 3306,
-        'adapter' => 'mysql'
+        'adapter' => 'mysql',
+        'mq'=>[
+            'user'=>'panzehir',
+            'pass'=>'panzehir'
+        ]
     )]);
+print_r(Setup::getConnectionsSettings());
 Setup::$enableLanguages[]=['id'=>2,'lang'=>'EN'];
 Setup::$enableLanguages[]=['id'=>3,'lang'=>'AR'];
 Setup::$installParameters=['news','banners'];
-App::run('install');
+App::run();

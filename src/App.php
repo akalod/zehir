@@ -387,6 +387,7 @@ class App
         if (Cache::$client) {
             Cache::$client->quit();
         }
+        MQ::destruct();
         exit();
     }
 

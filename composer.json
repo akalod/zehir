@@ -16,7 +16,8 @@
         "symfony/yaml": "^3.4",
         "erusev/parsedown": "^1",
         "php": ">=5.5.9",
-        "nesbot/carbon": "^1.34"
+        "nesbot/carbon": "1.39.0",
+        "php-amqplib/php-amqplib": "^2.9"
     },
     "autoload": {
       "psr-4": {
