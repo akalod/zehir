@@ -50,7 +50,7 @@ class MQ
             self::init();
 
         self::$channel->queue_declare($command, false, true, false, false);
-        self::$channel->basic_publish(new AMQPMessage(json_encode($data,JSON_NUMERIC_CHECK)), '', $command);
+        self::$channel->basic_publish(new AMQPMessage(json_encode($data,JSON_NUMERIC_CHECK),['delivery_mode' => 2]), '', $command);
 
     }
 
