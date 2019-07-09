@@ -49,7 +49,7 @@ class MQ
         if (!self::$channel)
             self::init();
 
-        self::$channel->queue_declare($command, false, false, false, false);
+        self::$channel->queue_declare($command, false, true, false, false);
         self::$channel->basic_publish(new AMQPMessage(json_encode($data,JSON_NUMERIC_CHECK)), '', $command);
 
     }
