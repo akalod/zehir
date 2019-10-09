@@ -10,6 +10,7 @@
 
 namespace Zehir\System;
 
+use phpDocumentor\Reflection\Types\Self_;
 use Zehir\Settings\Setup;
 use Predis;
 
@@ -42,14 +43,24 @@ class Cache
 
     }
 
-    public static function load($name, $type = self::SHARED)
+    public static function load($name, $type = self::SHARED, callable $fail = null)
     {
-        if ($type == self::SHARED)
-            return json_decode(file_get_contents(base . '/' . Setup::$cacheDir . self::$cacheFolder . $name));
-        if ($type == self::UNIQUE) {
-            self::redisCheckAndSet();
-            return self::check($name, $type);
+        if ($type == self::SHARED) {
+            $file = base . '/' . Setup::$cacheDir . self::$cacheFolder . $name;
+            if (file_exists($file)) {
+                return json_decode(file_get_contents($file));
+            }
         }
+        if ($type == self::UNIQUE) {
+            if (Setup::$redis) {
+                self::redisCheckAndSet();
+                $r = self::check($name, $type);
+                if ($r)
+                    return $r;
+            }
+        }
+        if ($fail)
+            return $fail();
     }
 
     public static function redisCheckAndSet()
@@ -70,17 +81,29 @@ class Cache
 
     public static function make($name, $data, $type = self::SHARED, $time = null)
     {
-        if (!$time) {
-            $time = Setup::$cacheTime;
-        }
-        if ($type == self::SHARED)
-            file_put_contents(base . '/' . Setup::$cacheDir . self::$cacheFolder . $name, json_encode($data));
-        if ($type == self::UNIQUE) {
-            self::redisCheckAndSet();
-            self::$client->set($name, json_encode($data));
-            self::$client->expire($name, $time);
+        if (Setup::$redis) {
+            if (!$time) {
+                $time = Setup::$cacheTime;
+            }
+            if ($type == self::SHARED)
+                file_put_contents(base . '/' . Setup::$cacheDir . self::$cacheFolder . $name, json_encode($data));
+            if ($type == self::UNIQUE) {
+                self::redisCheckAndSet();
+                self::$client->set($name, json_encode($data));
+                self::$client->expire($name, $time);
+            }
         }
     }
+
+    public static function getSet($name, callable $q, $time = null, $type = self::UNIQUE)
+    {
+        return self::load($name, $type, function () use ($q, $time, $name, $type) {
+            $r = $q();
+            self::make($name, $r, $type, $time);
+            return $r;
+        });
+    }
+
 
 }
 
