@@ -10,7 +10,7 @@
 
 namespace Zehir\Migrations;
 
-use Illuminate\Database\Capsule\Manager as DB;
+Use Zehir\System\DB;
 use Zehir\Settings\Setup;
 
 

@@ -10,7 +10,6 @@
 
 namespace Zehir\System;
 
-use Illuminate\Database\Capsule\Manager as DB;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 

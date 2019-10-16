@@ -17,7 +17,8 @@
         "erusev/parsedown": "^1",
         "php": ">=5.5.9",
         "nesbot/carbon": "1.39.0",
-        "php-amqplib/php-amqplib": "^2.9"
+        "php-amqplib/php-amqplib": "^2.9",
+        "symfony/console": "3.4.32"
     },
     "autoload": {
       "psr-4": {
@@ -26,7 +27,8 @@
         "Zehir\\Settings\\": "src/",
         "Zehir\\Migrations\\": "src/",
         "Zehir\\Controllers\\": "src/Controllers",
-        "Zehir\\Models\\": "src/Models"
+        "Zehir\\Models\\": "src/Models",
+        "Zehir\\CLI\\": "src/CLI"
       }
     }
 }

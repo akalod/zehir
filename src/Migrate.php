@@ -3,7 +3,7 @@
 namespace Zehir\Migrations;
 
 
-use Illuminate\Database\Capsule\Manager as Capsule;
+Use Zehir\System\DB as Capsule;
 use Phinx\Migration\AbstractMigration;
 use Zehir\Settings\Setup as setup;
 
@@ -19,7 +19,7 @@ class Migrate extends AbstractMigration
     {
 
         $selectedSetting = setup::getDBsettings($this->getInput()->getOption('environment'));
-        $newSetting =[
+        $newSetting = [
             'driver' => $selectedSetting['adapter'],
             'host' => $selectedSetting['host'],
             'port' => $selectedSetting['port'],

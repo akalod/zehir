@@ -26,7 +26,6 @@ Setup::configure([
             'pass'=>'panzehir'
         ]
     )]);
-print_r(Setup::getConnectionsSettings());
 Setup::$enableLanguages[]=['id'=>2,'lang'=>'EN'];
 Setup::$enableLanguages[]=['id'=>3,'lang'=>'AR'];
 Setup::$installParameters=['news','banners'];

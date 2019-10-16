@@ -11,7 +11,6 @@
 namespace Zehir\System;
 
 use Zehir\Settings\Setup;
-use Illuminate\Database\Capsule\Manager as DB;
 
 class Router
 {

@@ -10,7 +10,7 @@
 
 namespace Zehir\Models;
 
-Use Illuminate\Database\Capsule\Manager as DB;
+Use Zehir\System\DB;
 
 class Generic
 {

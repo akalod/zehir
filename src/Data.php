@@ -10,7 +10,6 @@
 
 namespace Zehir\System;
 
-use Phalcon\Mvc\Model\Transaction\Exception;
 Use Symfony\Component\Yaml\Yaml;
 use Zehir\Settings\Setup;
 

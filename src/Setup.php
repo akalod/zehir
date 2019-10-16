@@ -44,8 +44,7 @@ class Setup
      * @var array [db.table.seo] => [controller.file]
      */
     public static $search_extend = [
-        'pages' => 'page',
-        'categories' => 'category'
+        'pages' => 'page'
     ];
 
     public static $clawler_list = Array(

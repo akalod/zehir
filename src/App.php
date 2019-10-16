@@ -13,7 +13,6 @@ namespace Zehir\System;
 use Zehir\Migrations\Structure;
 use Zehir\Settings\Setup;
 use Zehir\Filters;
-use Illuminate\Database\Capsule\Manager as DB;
 
 class App
 {

@@ -10,7 +10,6 @@
 
 namespace Zehir\System;
 
-use phpDocumentor\Reflection\Types\Self_;
 use Zehir\Settings\Setup;
 use Predis;
 
