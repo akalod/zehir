@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 
 $autoloader = require __DIR__ . '/../src/composer_autoloader.php';
