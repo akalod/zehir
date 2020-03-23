@@ -41,5 +41,9 @@ class Generic
             ->first();
     }
 
+    public static function insert($data){
+        return DB::table(static::$table)->insertGetId($data);
+    }
+
 
 }
