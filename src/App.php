@@ -522,6 +522,9 @@ class App
         if (isset(self::$requestHeaders['Authorization'])) {
             return self::$requestHeaders['Authorization'];
         }
+        if (isset(self::$requestHeaders['authorization'])) {
+            return self::$requestHeaders['authorization'];
+        }
         return false;
     }
 
