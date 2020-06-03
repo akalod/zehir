@@ -369,7 +369,7 @@ class App
         // silmeler
         unset ($_FILES);
         unset ($_POST);
-        unset ($_GET);
+       // unset ($_GET);
     }
 
     /**
