@@ -69,3 +69,41 @@ Setup::configure([
         'adapter' => 'mysql'
     )]);
 ```
+
+### Enable Multi Languages 
+```
+Setup::$multiLang = true;
+Setup::$enableLanguages[] = ['id' => 1, 'lang' => 'TR'];
+Setup::$enableLanguages[] = ['id' => 2, 'lang' => 'EN'];
+```
+### Install pre set modules
+```
+Setup::$installParameters = ['news', 'banners', 'pages'];
+```
+### injection Twig Filter
+```
+Setup::$TwigFilters = [
+    [
+        "name" => 'tracker',
+        'fn' => function ($string) {
+            return $string . '?' . $_SERVER["QUERY_STRING"];
+        }
+    ]
+];
+```
+### database search routing name by seo column
+```
+Setup::$search_extend['dabase_table_name'] = 'controller_name';
+```
+### Add costum value
+```
+Setup::addCustom('JWT_SECRET', 'T3-5T~=!@\'/W3Eh:[Gb4@~{}_v{?e8}%7HDp');
+```
+### Get custom value
+```
+Setup::custom('JWT_SECRET')
+```
+### Assign value to template engine
+```
+App::assign('pageTitle',$data->name);
+```
