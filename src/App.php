@@ -30,6 +30,7 @@ class App
     private static $data = [];
 
     public static $message;
+    public static $twig;
 
     public static $requestHeaders = [];
 
@@ -369,7 +370,7 @@ class App
         // silmeler
         unset ($_FILES);
         unset ($_POST);
-       // unset ($_GET);
+        // unset ($_GET);
     }
 
     /**
@@ -480,16 +481,28 @@ class App
         if (Setup::$template_engine) {
             try {
                 $loader = new \Twig_Loader_Filesystem($realPath . 'views');
-                $twig = new \Twig_Environment($loader, array(
+                self::$twig = new \Twig_Environment($loader, array(
                     'cache' => base . '/' . Setup::$cacheDir,
                     'auto_reload' => true
                 ));
-                $twig->addFilter(
+                self::$twig->addFilter(
                     new \Twig_SimpleFilter('seo', function ($string) {
                         return Filters::seo($string);
                     })
                 );
-                $twig->addFilter(
+
+                if (is_array(\Zehir\Settings\Setup::$TwigFilters)) {
+                    foreach (\Zehir\Settings\Setup::$TwigFilters as $t) {
+
+                        self::$twig->addFilter(
+                            new \Twig_SimpleFilter($t['name'], function ($string) use ($t) {
+                                return $t['fn']($string);
+                            })
+                        );
+                    }
+                }
+
+                self::$twig->addFilter(
                     new \Twig_SimpleFilter('markdown', function ($string) {
                         $markDown = new \Parsedown();
                         $markDown->setSafeMode(true);
@@ -505,7 +518,7 @@ class App
             }
 
             try {
-                return $twig->render(self::$view . '.phtml', self::$data);
+                return self::$twig->render(self::$view . '.phtml', self::$data);
             } catch (\Twig_Error $exception) {
                 self::$message = $exception->getMessage();
                 if (Setup::$target != 'prod') {
