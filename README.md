@@ -44,7 +44,7 @@ App::run();
 ```
 ### you can use "no-database"
 ```php
-Setup::$noDatabase = true; 
+Setup::$noSQL = true; 
 ```
 ### you can disable routing from database
 ```php
