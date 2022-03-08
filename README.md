@@ -21,7 +21,7 @@ App::run();
 ```
 
 ###webconfig rule
-```
+```xml
 <rule name="ZehirMVC" stopProcessing="true">
     <match url="^(.*)$" ignoreCase="false" />
     <conditions logicalGrouping="MatchAll">
@@ -43,9 +43,13 @@ App::run();
 </IfModule>
 ```
 ### you can use "no-database"
+```php
 Setup::$noDatabase = true; 
+```
 ### you can disable routing from database
+```php
 Setup::$routeDB = false;
+```
 
 ###Databases settings
 ```php
@@ -71,13 +75,13 @@ Setup::configure([
 ```
 
 ### Enable Multi Languages 
-```
+```php
 Setup::$multiLang = true;
 Setup::$enableLanguages[] = ['id' => 1, 'lang' => 'TR'];
 Setup::$enableLanguages[] = ['id' => 2, 'lang' => 'EN'];
 ```
 ### Install pre set modules
-```
+```php
 Setup::$installParameters = ['news', 'banners', 'pages'];
 ```
 ### injection Twig Filter
@@ -92,18 +96,18 @@ Setup::$TwigFilters = [
 ];
 ```
 ### database search routing name by seo column
-```
+```php
 Setup::$search_extend['dabase_table_name'] = 'controller_name';
 ```
 ### Add costum value
-```
+```php
 Setup::addCustom('JWT_SECRET', 'T3-5T~=!@\'/W3Eh:[Gb4@~{}_v{?e8}%7HDp');
 ```
 ### Get custom value
-```
+```php
 Setup::custom('JWT_SECRET')
 ```
 ### Assign value to template engine
-```
+```php
 App::assign('pageTitle',$data->name);
 ```
