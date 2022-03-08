@@ -1,4 +1,4 @@
-###example index.php (or someone else)
+### example index.php (or someone else)
 ```php
 use  Zehir\Settings\Setup as setup;
 use  Zehir\System\App;
@@ -20,7 +20,7 @@ setup::$webUrl = 'http://localhost/';
 App::run();
 ```
 
-###webconfig rule
+### webconfig rule
 ```xml
 <rule name="ZehirMVC" stopProcessing="true">
     <match url="^(.*)$" ignoreCase="false" />
@@ -32,7 +32,7 @@ App::run();
     <action type="Rewrite" url="_app.php/{R:1}" />
 </rule>
 ```
-###.htaccess rule
+### .htaccess rule
 ```
 <IfModule mod_rewrite.c>
     RewriteEngine on
@@ -51,7 +51,7 @@ Setup::$noSQL = true;
 Setup::$routeDB = false;
 ```
 
-###Databases settings
+### Databases settings
 ```php
 Setup::configure([
     'local' => Array(
