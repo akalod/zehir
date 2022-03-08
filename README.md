@@ -83,6 +83,8 @@ Setup::$enableLanguages[] = ['id' => 2, 'lang' => 'EN'];
 ### Install pre set modules
 ```php
 Setup::$installParameters = ['news', 'banners', 'pages'];
+// if you need install modules send to 'install' param to App::run
+// App::run('install');
 ```
 ### injection Twig Filter
 ```
