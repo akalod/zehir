@@ -87,7 +87,7 @@ Setup::$installParameters = ['news', 'banners', 'pages'];
 // App::run('install');
 ```
 ### injection Twig Filter
-```
+```php
 Setup::$TwigFilters = [
     [
         "name" => 'tracker',
