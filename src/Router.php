@@ -28,14 +28,16 @@ class Router
     public static function getParams()
     {
 
-        if($_SERVER['SCRIPT_NAME'] == $_SERVER['PHP_SELF']){
-            $thisPage = substr($_SERVER['REQUEST_URI'],1);
-        }else {
-            $thisPage = substr(str_replace($_SERVER['SCRIPT_NAME'], null, $_SERVER['PHP_SELF']), 1);
-        }
+        $runningPath = explode('/', $_SERVER['SCRIPT_NAME']);
+        array_pop($runningPath);
+
+        $runningPath = implode('/', $runningPath);
+
+        $thisPage = substr(str_replace($runningPath, '', $_SERVER['REQUEST_URI']), 1);
+
 
         App::assign('thisPage', $thisPage);
-        App::assign('basePath', str_replace(['public/' . basename($_SERVER["SCRIPT_FILENAME"]), basename($_SERVER["SCRIPT_FILENAME"])], '', $_SERVER['SCRIPT_NAME']));
+        App::assign('basePath', $runningPath);
         return explode('/', $thisPage);
     }
 
