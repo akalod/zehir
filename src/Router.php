@@ -38,7 +38,11 @@ class Router
 
         App::assign('thisPage', $thisPage);
         App::assign('basePath', $runningPath);
-        return explode('/', $thisPage);
+       
+        $r = explode('/', $thisPage);
+	    $r[count($r)-1]=explode('?',$r[count($r)-1])[0];
+	    
+        return $r;
     }
 
     public static function search($key)
