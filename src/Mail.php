@@ -83,6 +83,16 @@ class Mail
                 )
             )
         );
+        
+        if(Setup::custom('ccEmails')){
+            if(is_array(Setup::custom('ccEmails'))){
+                foreach(Setup::custom('ccEmails') as $cc){
+                    $mail->addCC($cc);
+                }
+            }else{
+                $mail->addCC(Setup::custom('ccEmails'));
+            }
+        }
 
         if (Setup::$target != 'prod') {
             $mail->addAddress(Setup::$SMTP['DevMail']);
