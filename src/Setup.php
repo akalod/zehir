@@ -36,6 +36,7 @@ class Setup
     public static $langId = 1;
     public static $mainController = 'main';
     public static $routeDB = true;
+    public static $TwigFilters = null;
     public static $disableServiceArea = false;
     public static $disablePlannedDelivery = false;
     public static $installParameters = ['pages'];
