@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sengul
- * Date: 7/2/2018
- * Time: 5:21 PM
- */
 
 namespace Zehir\System;
 
