@@ -21,6 +21,25 @@ class Cache
 
     public static $client = null;
 
+    public static function remove($name, $type = self::SHARED){
+        if ($type == self::SHARED) {
+            $fn = base . '/' . Setup::$cacheDir . self::$cacheFolder . $name;
+            if (!file_exists($fn))
+                return false;
+            try{
+                unlink($fn);
+                return true;
+            }catch (\Exception $e){
+               return false;
+            }
+        }
+        if ($type == self::UNIQUE) {
+            self::redisCheckAndSet();
+            self::$client->del($name);
+        }
+    }
+    
+    
     public static function check($name, $type = self::SHARED)
     {
         if ($type == self::SHARED) {
