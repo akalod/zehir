@@ -21,6 +21,7 @@ class Cache
 
     public static $client = null;
 
+
     public static function remove($name, $type = self::SHARED){
         if ($type == self::SHARED) {
             $fn = base . '/' . Setup::$cacheDir . self::$cacheFolder . $name;
@@ -39,8 +40,7 @@ class Cache
         }
         return true;
     }
-    
-    
+
     public static function check($name, $type = self::SHARED)
     {
         if ($type == self::SHARED) {
@@ -84,9 +84,14 @@ class Cache
 
     public static function redisCheckAndSet()
     {
+
         if (!self::$client) {
             Predis\Autoloader::register();
             $values = Setup::getConnectionsSettings();
+            if($values['redis_uri']){
+                self::$client = new Predis\Client($values['redis_uri'];
+                return;
+            }
             self::$client = new Predis\Client(array(
                 "scheme" => "tcp",
                 "host" => $values['redis_server'] ? $values['redis_server'] : 'localhost',
