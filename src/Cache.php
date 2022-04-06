@@ -37,6 +37,7 @@ class Cache
             self::redisCheckAndSet();
             self::$client->del($name);
         }
+        return true;
     }
     
     
