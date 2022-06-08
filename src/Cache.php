@@ -89,7 +89,7 @@ class Cache
             Predis\Autoloader::register();
             $values = Setup::getConnectionsSettings();
             if($values['redis_uri']){
-                self::$client = new Predis\Client($values['redis_uri'];
+                self::$client = new Predis\Client($values['redis_uri']);
                 return;
             }
             self::$client = new Predis\Client(array(
